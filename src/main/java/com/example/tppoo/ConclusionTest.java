@@ -1,3 +1,4 @@
+package com.example.tppoo;
 public class ConclusionTest {
     private Test test;
     private String conclusion;

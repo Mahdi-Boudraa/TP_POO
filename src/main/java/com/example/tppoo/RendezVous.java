@@ -1,4 +1,7 @@
+package com.example.tppoo;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.ArrayList;
 
 public class RendezVous {
     
@@ -7,6 +10,7 @@ public class RendezVous {
     private LocalDateTime dateTime;
     private String Duree;
     private String observation;
+    private List<Patient> patientList;
 
 
     public RendezVous(Ortho orthophonist,Patient patient,LocalDateTime dateTime, String observation){
@@ -31,6 +35,14 @@ public class RendezVous {
         this.orthophonist=orthophonist;
         this.dateTime=dateTime;
         orthophonist.ajouterRendezVous(this);
+    }
+
+    public RendezVous(Ortho orthophonist,List<Patient> patientList,LocalDateTime dateTime){
+        this.orthophonist= orthophonist;
+        this.dateTime=dateTime;
+        this.patientList= patientList;
+        orthophonist.ajouterRendezVous(this);
+
     }
 
     public void setDuree(String duree){

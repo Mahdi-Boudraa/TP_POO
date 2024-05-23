@@ -1,3 +1,4 @@
+package com.example.tppoo;
 public class Exercice {
     private String consigne;
     private String materiel;

@@ -1,3 +1,4 @@
+package com.example.tppoo;
 import java.time.LocalDateTime;
 public class Enfant extends Patient {
     private String classeEtude;

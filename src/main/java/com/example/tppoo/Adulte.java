@@ -1,6 +1,9 @@
+package com.example.tppoo;
+
 import java.time.LocalDateTime;
 
 public class Adulte extends Patient{
+
     private String diplome;
     private String profession;
     private String numero;

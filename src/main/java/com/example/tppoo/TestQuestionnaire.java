@@ -1,3 +1,4 @@
+package com.example.tppoo;
 import java.util.List;
 
 public class TestQuestionnaire extends Test {

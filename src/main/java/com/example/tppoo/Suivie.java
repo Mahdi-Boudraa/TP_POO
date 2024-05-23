@@ -1,3 +1,5 @@
+package com.example.tppoo;
+
 import java.time.LocalDateTime;
 
 public class Suivie extends RendezVous{
