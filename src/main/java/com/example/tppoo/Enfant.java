@@ -15,6 +15,10 @@ public class Enfant extends Patient {
         
     }
 
+    public Enfant(Ortho ortho,String nom,String prenom,int age){
+        super(ortho,nom,prenom,age);
+    }
+
 
     
 }

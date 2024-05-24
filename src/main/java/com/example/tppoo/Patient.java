@@ -1,4 +1,5 @@
 package com.example.tppoo;
+import java.time.Instant;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +14,7 @@ public class Patient {
     private String nom;
     private String prenom;
     private LocalDateTime dateDeNaissance;
+    private int age;
     private String lieuDeNaissance;
     private String adresse;
     private List<RendezVous> listeRendezVous;
@@ -22,6 +24,7 @@ public class Patient {
     private FicheDeSuivie ficheDeSuivie;
     private Boolean isAdulte;
     private Boolean anamneseEffectuee;
+    private Anamnese anamnese;
 
     public Patient(Ortho orthophonist, String nom,String prenom, LocalDateTime dateNaissance,String LieuNaissance,String adresse,Boolean adulte){
         this.numPatient = generatePatientNumber();
@@ -31,7 +34,6 @@ public class Patient {
         this.lieuDeNaissance=LieuNaissance;
         this.adresse=adresse;
         this.isAdulte=adulte;
-        this.anamneseEffectuee=false;
         this.listeRendezVous = new ArrayList<>();
         this.listeBO = new ArrayList<>();
         this.listeDesFichesDeSuivie = new ArrayList<>();
@@ -41,13 +43,28 @@ public class Patient {
 
     }
 
+    public Patient(Ortho ortho,String nom,String prenom,int age){
+        if (age>=18){
+            isAdulte=true;
+        }
+        this.numPatient = generatePatientNumber();
+        this.nom=nom;
+        this.prenom=prenom;
+        this.age= age;
+        this.listeRendezVous = new ArrayList<>();
+        this.listeBO = new ArrayList<>();
+        this.listeDesFichesDeSuivie = new ArrayList<>();
+        this.listeTroubles = new HashSet<>();
+        this.orthophonist=ortho;
+
+        orthophonist.ajouterPatient(this);
+    }
+
     private int generatePatientNumber() {
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-        String formattedDate = now.format(formatter);
+        long currentTimeMillis = Instant.now().toEpochMilli();
         Random random = new Random();
-        int randomNumber = 100 + random.nextInt(900); // generates a random number between 100 and 999
-        return Integer.parseInt(formattedDate + randomNumber);
+        int randomNumber = random.nextInt(1000); // generates a random number between 0 and 999
+        return (int) (currentTimeMillis % Integer.MAX_VALUE) + randomNumber;
     }
 
     public int getPatientId() {
@@ -87,5 +104,17 @@ public class Patient {
 
     public List<RendezVous> getListRendezVous(){
         return listeRendezVous;
+    }
+
+    public String getNom(){
+        return nom;
+    }
+
+    public void setAnamnese(Anamnese anamnese1){
+        this.anamnese=anamnese1;
+    }
+
+    public Anamnese getAnamnese(){
+        return anamnese;
     }
 }

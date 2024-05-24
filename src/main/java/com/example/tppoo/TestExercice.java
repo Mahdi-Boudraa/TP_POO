@@ -1,4 +1,5 @@
 package com.example.tppoo;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -7,6 +8,7 @@ public class TestExercice extends Test {
 
     public TestExercice(Patient patient,String nom,List<Exercice> exercices) {
         super(patient,nom);
+        listeExercices = new ArrayList<>();
         for (Exercice exo: exercices){
             ExercicePatient exoPatient = new ExercicePatient(exo.getConsigne(),exo.getMateriel());
             listeExercices.add(exoPatient);

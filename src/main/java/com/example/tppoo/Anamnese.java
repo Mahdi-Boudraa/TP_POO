@@ -5,14 +5,20 @@ import java.util.List;
 public class Anamnese {
     private List<QuestionPatient> questions;
 
-    public Anamnese(Patient patient) {
-        this.questions = new ArrayList<>();
-        if (patient.getIsAdulte()) {
+    public Anamnese(List<Question> quests,int age) {
+        questions = new ArrayList<>();
+        for(Question quest: quests){
+            QuestionPatient questpation = new QuestionPatient(quest.getPrompt(), quest.getCategorie(), quest.getType(),quest.getOtions(),quest.getRepense());
+            questions.add(questpation);
+        }
+
+        if (age>=18) {
             initializeAdultQuestions();
         } else {
             initializeChildQuestions();
         }
     }
+
 
     private void initializeAdultQuestions() {
         questions.add(new QuestionPatient("Describe your medical history.", Categorie.MEDICAL_HISTORY,TypeQuestion.LIBRE));
@@ -46,4 +52,5 @@ public class Anamnese {
     public void supprimerQuestion (QuestionPatient question){
         questions.remove(question);
     }
+
 }

@@ -1,4 +1,5 @@
 package com.example.tppoo;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestQuestionnaire extends Test {
@@ -6,6 +7,7 @@ public class TestQuestionnaire extends Test {
 
     public TestQuestionnaire(Patient patient,String nom, List<Question> questions) {
         super(patient,nom);
+        listquestions = new ArrayList<>();
         for(Question quest: questions){
             QuestionPatient questpation = new QuestionPatient(quest.getPrompt(), quest.getCategorie(), quest.getType(),quest.getOtions(),quest.getRepense());
             listquestions.add(questpation);

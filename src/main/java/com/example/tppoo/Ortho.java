@@ -53,6 +53,10 @@ public class Ortho{
         rendezvous.getPatient().getListRendezVous().add(rendezvous);
     }
 
+    public void ajouterRendezVousConsultation(RendezVous rendezVous){
+        listeRendezVous.add(rendezVous);
+    }
+
     public void ajouterExercice(String nom,String consigne){
 
         ExercicePatient exercice = new ExercicePatient(consigne);
@@ -63,6 +67,18 @@ public class Ortho{
     public void ajouterQuestion(String prompt, Categorie categorie, TypeQuestion type, List<String> options, List<String> repense){
         Question question = new Question(prompt, categorie, type, options, repense);
         listeQuestions.add(question);
+    }
+
+    public List<Patient> getPatients(){
+        return listePatient;
+    }
+
+    public List<RendezVous> getListeRendezVous(){
+        return listeRendezVous;
+    }
+
+    public List<Question> getListeQuestions(){
+        return listeQuestions;
     }
     
 

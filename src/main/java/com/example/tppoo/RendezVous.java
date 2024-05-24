@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class RendezVous {
     
     private Ortho orthophonist;
-    private Patient patient;
     private LocalDateTime dateTime;
+    private Patient patient;
     private String Duree;
     private String observation;
     private List<Patient> patientList;
@@ -26,7 +26,7 @@ public class RendezVous {
         this.orthophonist=orthophonist;
         this.dateTime=dateTime;
         this.observation=observation;
-        orthophonist.ajouterRendezVous(this);
+        orthophonist.ajouterRendezVousConsultation(this);
 
     }
 
@@ -59,6 +59,10 @@ public class RendezVous {
 
     public Patient getPatient(){
         return patient;
+    }
+
+    public LocalDateTime getDate(){
+        return dateTime;
     }
 
 }

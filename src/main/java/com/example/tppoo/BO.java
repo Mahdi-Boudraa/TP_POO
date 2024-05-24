@@ -1,23 +1,35 @@
 package com.example.tppoo;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class BO {
 
+    private Ortho ortho;
     private Patient patient;
     private Anamnese anamnese;
     private EpreuveClinique epreuvesClinique;
     private Diagnostic diagnostics;
     private ProjetTherapeutique projets;
+    private String nom;
+    private String prenom;
+    private int age;
 
-    public BO(Patient patient){
+    public BO(Ortho ortho,Patient patient){
+        this.ortho= ortho;
         this.patient = patient;
 
 
-        if (!patient.getAnamneseEffectuee()) {
-            this.anamnese = new Anamnese(patient);
-            patient.setAnamneseEffectuee(true);
-        }
         patient.ajouterBO(this);
+
+    }
+
+    public BO(Ortho ortho,List<Question> questions, String nom, String prenom, int age){
+        this.ortho= ortho;
+        Anamnese anamnese1 = new Anamnese(questions,age);
+        this.anamnese = anamnese1;
+        this.nom=nom;
+        this.prenom=prenom;
+        this.age=age;
 
     }
 
@@ -38,11 +50,33 @@ public class BO {
         Trouble troubl = new Trouble(nomTrouble,categorieTrouble);
         Diagnostic diagno = new Diagnostic(troubl,patient);
         this.diagnostics = diagno;
+        this.patient.ajouterTrouble(troubl);
     }
 
     public void ajouterProjet(String projet){
         ProjetTherapeutique proj = new ProjetTherapeutique(projet);
         this.projets = proj;
+    }
+
+    public EpreuveClinique getEpreuvesClinique(){
+        return epreuvesClinique;
+    }
+
+    public void prendreCharge(){
+        Patient newPatient;
+        if(age>=18) {
+            newPatient = new Adulte(ortho, nom, prenom, age);
+
+        }
+        else{
+            newPatient = new Enfant(ortho,nom,prenom,age);
+
+        }
+
+        patient = newPatient;
+        patient.ajouterBO(this);
+        patient.setAnamnese(anamnese);
+
     }
 
 

@@ -20,11 +20,14 @@ public class EpreuveClinique {
     public void setObservation(ObservationClinique obs){
         this.observations = obs;
     }
-
+//change this one asap
     public int getScore(){
         return 0;
     }
 
+    public TestQuestionnaire getTestQuest(){
+        return testQuest;
+    }
 
     
 }

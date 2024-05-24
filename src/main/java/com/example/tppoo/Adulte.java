@@ -14,5 +14,9 @@ public class Adulte extends Patient{
         this.profession=profession;
         this.numero=numero;
     }
+
+    public Adulte(Ortho ortho,String nom,String prenom,int age){
+        super(ortho,nom,prenom,age);
+    }
     
 }
