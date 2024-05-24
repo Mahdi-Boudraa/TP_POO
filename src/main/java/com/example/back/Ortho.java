@@ -8,7 +8,7 @@ public class Ortho{
     private String nom;
     private String prenom;
     private String adress;
-    private int tlph;
+    private String tlph;
     private String email;
     private String motDePasse;
 
@@ -19,7 +19,7 @@ public class Ortho{
     private List<Question> listeQuestions;
     private List<Objectif> listeObjectifs;
 
-    public Ortho(String nom,String prenom,String adress,int tlph,String email, String motDePasse){
+    public Ortho(String nom,String prenom,String adress,String tlph,String email, String motDePasse){
         this.nom=nom;
         this.prenom=prenom;
         this.adress=adress;

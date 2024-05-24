@@ -1,4 +1,6 @@
 package com.example.front;
+import com.example.back.*;
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -59,6 +61,26 @@ public class SignUp {
                 account.remove(0);
                 if (FilesHandlingFunctions.createFolderIfNotExists(userEmail)){
                     FilesHandlingFunctions.createFileIfNotExists(userEmail+"/doctor_data");
+                    FilesHandlingFunctions.createFileIfNotExists(userEmail+"/statistiques.bin");
+                    Statistics initialStatistics = new Statistics(0,0,0) ;
+                    // Write object of statistics
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter(userEmail+"/statistiques.bin"))) {
+                        writer.write(initialStatistics.getIndex1());
+                        writer.newLine();
+                        writer.write(initialStatistics.getIndex2());
+                        writer.newLine();
+                        writer.write(initialStatistics.getIndex3());
+                        writer.newLine();
+                        System.out.println("Field values have been written to patient.txt");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/com/example/front/current.txt"))) {
+                        writer.write(userEmail);
+                        writer.newLine();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     account.add(userFirstName);
                     account.add(userLastName);
                     account.add(userPhoneNumber);
@@ -69,7 +91,7 @@ public class SignUp {
                 }
                 try {
                     // Load the Second side
-                    Parent secondView = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+                    Parent secondView = FXMLLoader.load(getClass().getResource("/com/example/tppoo/dashboard.fxml"));
                     Scene secondScene = new Scene(secondView);
 
                     // Get the current stage (window) using the event's source
@@ -77,7 +99,6 @@ public class SignUp {
 
                     // Set the new scene on the current stage
                     window.setScene(secondScene);
-                    window.setTitle("Log In");
                     window.show();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -98,7 +119,7 @@ public class SignUp {
     public void handleLogInLink (Event event) throws IOException {
         try {
             // Load the Second side
-            Parent secondView = FXMLLoader.load(getClass().getResource("log-in.fxml"));
+            Parent secondView = FXMLLoader.load(getClass().getResource("/com/example/tppoo/log-in.fxml"));
             Scene secondScene = new Scene(secondView);
 
             // Get the current stage (window) using the event's source

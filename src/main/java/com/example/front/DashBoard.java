@@ -1,4 +1,6 @@
 package com.example.front;
+import com.example.back.*;
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class DashBoard implements Initializable {
@@ -49,18 +52,19 @@ public class DashBoard implements Initializable {
     public void initialize (URL url , ResourceBundle rb) {
 
         //fill doctor name
-        doctorName.setText("Dr. Boudraa Mahdi");
+        String orthoEmail = FilesHandlingFunctions.readLinesFromFile("src/main/java/com/example/front/current.txt").get(0);
+        ArrayList<String> orthoData = FilesHandlingFunctions.readLinesFromFile(orthoEmail+"/doctor_data") ;
+        Ortho doctor = new Ortho(orthoData.get(1),orthoData.get(0),orthoData.get(3),orthoData.get(2),orthoData.get(4),orthoData.get(5)) ;
+        doctorName.setText("Dr. " + orthoData.get(1) + " " + orthoData.get(0));
         doctorName.setStyle("-fx-fill: #0282c2; -fx-font-weight: bold; -fx-text-alignment: left;");
-        // fill patient name
-        nextPatientName.setText("Apres 10 min");
-        nextPatientName.setStyle("-fx-fill: #000000; -fx-font-weight: bold; -fx-text-alignment: left;");
         // fill statistics
-        index1.setText("123");
-        index1.setStyle("-fx-fill: #ffffff; -fx-font-family: Product Sans Bold ; -fx-font-weight: bold; -fx-text-alignment: left;");
-        index2.setText("23");
-        index2.setStyle("-fx-fill: #ffffff; -fx-font-family: Product Sans Bold ; -fx-font-weight: bold; -fx-text-alignment: left;");
-        index3.setText("14");
-        index3.setStyle("-fx-fill: #ffffff; -fx-font-family: Product Sans Bold ; -fx-font-weight: bold; -fx-text-alignment: left;");
+        Statistics stats = FilesHandlingFunctions.readStatisticsFromFile(orthoEmail + "/statistiques.bin");
+        index1.setText(String.valueOf(stats.getIndex1()));
+        index1.setStyle("-fx-fill: #ffffff; -fx-font-family: Product Sans Bold ; -fx-font-weight: bold;");
+        index2.setText(String.valueOf(stats.getIndex2()));
+        index2.setStyle("-fx-fill: #ffffff; -fx-font-family: Product Sans Bold ; -fx-font-weight: bold;");
+        index3.setText(String.valueOf(stats.getIndex3()));
+        index3.setStyle("-fx-fill: #ffffff; -fx-font-family: Product Sans Bold ; -fx-font-weight: bold;");
         // fill charts
 
     }

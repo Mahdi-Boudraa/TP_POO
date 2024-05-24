@@ -1,15 +1,10 @@
-package com.example.front;
+package com.example.back;
 
-import javafx.event.Event;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+
+import com.example.front.Statistics;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FilesHandlingFunctions {
 
@@ -33,27 +28,25 @@ public class FilesHandlingFunctions {
         return emailsList;
     }
 
-    public static boolean passwordEquals(String filePath , String email, String password) {
-
+    public static boolean passwordEquals(String filePath, String email, String password) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
-            int lineNumber = 0;
 
             while ((line = br.readLine()) != null) {
-                if (lineNumber % 2 == 0) {
-                    if (email.equals(line)){
-                        if (password.equals(br.readLine())){
-                            return true;
-                        }
+                // Assuming emails and passwords are on alternating lines
+                if (email.equals(line.trim())) {
+                    String passwordLine = br.readLine();
+                    if (passwordLine != null && password.equals(passwordLine.trim())) {
+                        return true;
                     }
-                    return false;
+                    return false;  // If email matches but password doesn't
                 }
-                lineNumber++;
             }
         } catch (IOException e) {
-            return false;
+            e.printStackTrace();
+            return false;  // In case of an exception, return false
         }
-        return false;
+        return false;  // If no matching email is found
     }
 
     public static boolean doesUserExist (String filePath , String email) {
@@ -91,6 +84,19 @@ public class FilesHandlingFunctions {
             e.printStackTrace();
         }
     }
+    // Method to read lines from a file
+    public static ArrayList<String> readLinesFromFile(String filePath) {
+        ArrayList<String> lines = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                lines.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
+    }
 
     public static boolean createFolderIfNotExists(String folderPath) {
         File folder = new File(folderPath);
@@ -107,5 +113,32 @@ public class FilesHandlingFunctions {
         } else {
             return false;
         }
+    }
+    public static Statistics readStatisticsFromFile(String filePath) {
+        int index1 = 0;
+        int index2 = 0;
+        int index3 = 0;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line1 = reader.readLine();
+            String line2 = reader.readLine();
+            String line3 = reader.readLine();
+
+            if (line1 != null && !line1.trim().isEmpty()) {
+                index1 = Integer.parseInt(line1.trim());
+            }
+
+            if (line2 != null && !line2.trim().isEmpty()) {
+                index2 = Integer.parseInt(line2.trim());
+            }
+
+            if (line3 != null && !line3.trim().isEmpty()) {
+                index3 = Integer.parseInt(line3.trim());
+            }
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        return new Statistics(index1, index2, index3);
     }
 }

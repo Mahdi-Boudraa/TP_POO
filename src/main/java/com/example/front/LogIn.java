@@ -1,4 +1,7 @@
 package com.example.front;
+import com.example.back.*;
+
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,9 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,8 +43,14 @@ public class LogIn {
                 emailNotExisting.setText("");
                 wrongPassword.setText("");
                 try {
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/com/example/front/current.txt"))) {
+                        writer.write(userEmail);
+                        writer.newLine();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     // Load the Second side
-                    Parent secondView = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+                    Parent secondView = FXMLLoader.load(getClass().getResource("/com/example/tppoo/dashboard.fxml"));
                     Scene secondScene = new Scene(secondView);
 
                     // Get the current stage (window) using the event's source
@@ -82,7 +89,7 @@ public class LogIn {
     public void handleSignUpLink (Event event) throws IOException {
         try {
             // Load the Second side
-            Parent secondView = FXMLLoader.load(getClass().getResource("sign-up.fxml"));
+            Parent secondView = FXMLLoader.load(getClass().getResource("/com/example/tppoo/sign-up.fxml"));
             Scene secondScene = new Scene(secondView);
 
             // Get the current stage (window) using the event's source

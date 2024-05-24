@@ -1,4 +1,6 @@
 package com.example.front;
+import com.example.back.*;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 

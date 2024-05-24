@@ -21,7 +21,7 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
 
-        /*launch();*/
+        /*launch();*//*
         Ortho yacine = new Ortho("allag","yacine","Eplf",05555,"Mahdi@gmail.com","12345");
         Patient mahdi = new Adulte(yacine,"mahdi","momo", LocalDateTime.now(),"tebessa","dar","engin","mahdi","054343");
         Patient moha = new Enfant(yacine,"moha","mimi",LocalDateTime.now(),"tebessa","dar","home","2222","423223");
@@ -44,6 +44,6 @@ public class HelloApplication extends Application {
 
         for (RendezVous rdv : yacine.getListeRendezVous()){
             System.out.println(rdv.getDate());
-        }
+        }*/
     }
 }
