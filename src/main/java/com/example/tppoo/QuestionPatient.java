@@ -3,7 +3,6 @@ import java.util.List;
 
 public class QuestionPatient {
     private String question;
-    private EpreuveClinique epreuveClinique;
     private Categorie categorie;
     private TypeQuestion type;
     private List<String> options; // Pour QCU et QCM

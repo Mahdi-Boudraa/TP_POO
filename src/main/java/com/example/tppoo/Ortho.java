@@ -2,6 +2,7 @@ package com.example.tppoo;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Ortho{
     private String nom;
@@ -16,7 +17,7 @@ public class Ortho{
     private List<Anamnese> listeAnamnese;
     private List<ExercicePatient> listeExercices;
     private List<Question> listeQuestions;
-    private enum TestType{EXERCICE,QUESTIONNAIRE};
+    private List<Objectif> listeObjectifs;
 
     public Ortho(String nom,String prenom,String adress,int tlph,String email, String motDePasse){
         this.nom=nom;
@@ -30,6 +31,7 @@ public class Ortho{
         this.listeAnamnese = new ArrayList<>();
         this.listeExercices = new ArrayList<>();
         this.listeQuestions = new ArrayList<>();
+        this.listeObjectifs = new ArrayList<>();
 
 
     }
@@ -67,6 +69,11 @@ public class Ortho{
     public void ajouterQuestion(String prompt, Categorie categorie, TypeQuestion type, List<String> options, List<String> repense){
         Question question = new Question(prompt, categorie, type, options, repense);
         listeQuestions.add(question);
+    }
+
+    public void ajouterObjectif(String nom, ObjectifCategorie categorie){
+        Objectif obj = new Objectif(nom,categorie);
+        listeObjectifs.add(obj);
     }
 
     public List<Patient> getPatients(){

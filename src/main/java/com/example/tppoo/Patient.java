@@ -117,4 +117,12 @@ public class Patient {
     public Anamnese getAnamnese(){
         return anamnese;
     }
+
+    public void ajouteFicheDeSuivie(FicheDeSuivie fiche){
+        this.listeDesFichesDeSuivie.add(fiche);
+    }
+
+    public void setFicheDeSuivie(FicheDeSuivie fiche){
+        this.ficheDeSuivie=fiche;
+    }
 }
