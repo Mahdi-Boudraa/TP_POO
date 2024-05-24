@@ -1,9 +1,9 @@
-module com.example.tppoo {
+module com.example.front {
     requires javafx.controls;
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
 
-    opens com.example.tppoo to javafx.fxml;
-    exports com.example.tppoo;
+    opens com.example.front to javafx.fxml;
+    exports com.example.front;
 }
