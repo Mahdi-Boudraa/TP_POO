@@ -114,15 +114,16 @@
             <Font name="Product Sans Bold" size="23.0" />
          </font>
       </CheckBox>
-      <TableView layoutX="194.0" layoutY="159.0" prefHeight="480.0" prefWidth="785.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Nom" />
-          <TableColumn prefWidth="75.0" text="Prenom" />
-            <TableColumn prefWidth="166.0" text="Date de naissance" />
-            <TableColumn prefWidth="125.0" text="Numero" />
-            <TableColumn prefWidth="343.0" text="Details et operation" />
-        </columns>
+      <TableView fx:id="patientsTableView" layoutX="194.0" layoutY="159.0" prefHeight="480.0" prefWidth="785.0">
+         <columns>
+            <TableColumn fx:id="nomColumn" prefWidth="75.0" text="Nom" />
+            <TableColumn fx:id="prenomColumn" prefWidth="75.0" text="Prenom" />
+            <TableColumn fx:id="dateDeNaissanceColumn" prefWidth="166.0" text="Date de naissance" />
+            <TableColumn fx:id="numPatientColumn" prefWidth="125.0" text="Numero" />
+            <TableColumn fx:id="actionColumn" prefWidth="339.0" text="Actions" />
+         </columns>
       </TableView>
+
       <Text layoutX="194.0" layoutY="661.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Page" textAlignment="CENTER" wrappingWidth="81.98310279846191">
          <font>
             <Font name="Product Sans Bold" size="15.0" />

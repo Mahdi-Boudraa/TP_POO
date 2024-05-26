@@ -30,8 +30,29 @@ public class TestQuestionnaire extends Test {
     public int calculerScoreTotal() {
         int score=0;
         for (QuestionPatient ques: listquestions ){
-            score=+ques.getScore();
+            score+=ques.getScore();
         }
+        System.out.println("it is now "+score );
         return score;
+    }
+
+    public void printQuestionsDetails() {
+        for (QuestionPatient ques : listquestions) {
+            System.out.println("Question: " + ques.getQuestion() + ", Response: " + ques.getRepensePatient() + ", Score: " + ques.getScore());
+        }
+    }
+    public List<String> getQuestion(){
+        List<String> list = new ArrayList<>();
+        for(QuestionPatient ques : listquestions){
+            list.add(ques.getQuestion());
+        }
+        return list;
+    }
+    public List<String> getRepenses(){
+        List<String> list = new ArrayList<>();
+        for(QuestionPatient ques : listquestions){
+            list.add(ques.getRepensePatient());
+        }
+        return list;
     }
 }

@@ -1,4 +1,7 @@
 package com.example.back;
+import com.example.front.FicheDeSuivieController;
+
+import java.io.Serializable;
 import java.time.Instant;
 
 import java.time.LocalDateTime;
@@ -7,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
-public class Patient {
+public class Patient implements Serializable {
     private Ortho orthophonist;
     private int numPatient;
     private String nom;
@@ -19,7 +22,7 @@ public class Patient {
     private List<RendezVous> listeRendezVous;
     private List<BO> listeBO;
     private List<FicheDeSuivie> listeDesFichesDeSuivie;
-    private Set<Trouble> listeTroubles;
+    private List<Trouble> listeTroubles;
     private FicheDeSuivie ficheDeSuivie;
     private Boolean isAdulte;
     private Boolean anamneseEffectuee;
@@ -36,8 +39,9 @@ public class Patient {
         this.listeRendezVous = new ArrayList<>();
         this.listeBO = new ArrayList<>();
         this.listeDesFichesDeSuivie = new ArrayList<>();
-        this.listeTroubles = new HashSet<>();
+        this.listeTroubles = new ArrayList<>();
         this.orthophonist=orthophonist;
+        this.listeDesFichesDeSuivie=new ArrayList<>();
         orthophonist.ajouterPatient(this);
 
     }
@@ -53,9 +57,8 @@ public class Patient {
         this.listeRendezVous = new ArrayList<>();
         this.listeBO = new ArrayList<>();
         this.listeDesFichesDeSuivie = new ArrayList<>();
-        this.listeTroubles = new HashSet<>();
+        this.listeTroubles = new ArrayList<>();
         this.orthophonist=ortho;
-
         orthophonist.ajouterPatient(this);
     }
 
@@ -97,6 +100,10 @@ public class Patient {
         this.listeTroubles.add(trouble);
     }
 
+    public List<Trouble> getTroubles(){
+        return listeTroubles;
+    }
+
     public void ajouterRendezVous(RendezVous rendezvous){
         listeRendezVous.add(rendezvous);
     }
@@ -123,5 +130,35 @@ public class Patient {
 
     public void setFicheDeSuivie(FicheDeSuivie fiche){
         this.ficheDeSuivie=fiche;
+    }
+
+    public String getPrenom(){
+        return prenom;
+    }
+
+    public FicheDeSuivie getFicheDeSuivie(){
+        return ficheDeSuivie;
+    }
+
+    public List<FicheDeSuivie> getListeDesFichesDeSuivie(){
+        return listeDesFichesDeSuivie;
+    }
+    public LocalDateTime getDateDeNaissance(){
+        return dateDeNaissance;
+    }
+
+    public String getLieuDeNaissance(){
+        return lieuDeNaissance;
+    }
+
+    public String getAdresse(){
+        return adresse;
+    }
+    public List<BO> getBO(){
+        return listeBO;
+    }
+
+    public Ortho getOrtho(){
+        return orthophonist;
     }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 public class EpreuveClinique {
 
     private Patient patient;
+    private BO bo;
     private ObservationClinique observations;
     private TestQuestionnaire testQuest;
     private TestExercice testExo;
@@ -16,17 +17,35 @@ public class EpreuveClinique {
 
 
     }
+    public EpreuveClinique(BO bo,TestQuestionnaire testQuest,TestExercice testExercice,ObservationClinique observationClinique,int Score){
+        this.bo = bo;
+        this.testExo=testExercice;
+        this.testQuest=testQuest;
+        this.observations=observationClinique;
+        this.Score=Score;
+
+        bo.ajouterEpreuveClinique(this);
+    }
 
     public void setObservation(ObservationClinique obs){
         this.observations = obs;
     }
 //change this one asap
     public int getScore(){
-        return 0;
+        Score =testQuest.calculerScoreTotal()+testExo.calculerScoreTotal();
+    return Score;
     }
 
     public TestQuestionnaire getTestQuest(){
         return testQuest;
+    }
+
+    public String getObservation(){
+        return observations.getObservationClinique();
+    }
+
+    public TestExercice getTestExo(){
+        return testExo;
     }
 
     

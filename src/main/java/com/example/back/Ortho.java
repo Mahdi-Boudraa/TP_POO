@@ -1,10 +1,12 @@
 package com.example.back;
+import java.io.Serializable;
+
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Ortho{
+public class Ortho implements Serializable{
     private String nom;
     private String prenom;
     private String adress;
@@ -15,7 +17,7 @@ public class Ortho{
     private List<Patient> listePatient;
     private List<RendezVous> listeRendezVous;
     private List<Anamnese> listeAnamnese;
-    private List<ExercicePatient> listeExercices;
+    private List<Exercice> listeExercices;
     private List<Question> listeQuestions;
     private List<Objectif> listeObjectifs;
 
@@ -59,17 +61,28 @@ public class Ortho{
         listeRendezVous.add(rendezVous);
     }
 
-    public void ajouterExercice(String nom,String consigne){
+    public void ajouterExercice(String consigne,String materiel){
 
-        ExercicePatient exercice = new ExercicePatient(consigne);
+        Exercice exercice = new Exercice(consigne,materiel);
         listeExercices.add(exercice);
 
+    }
+
+    public void ajouterExercice(String consigne){
+        Exercice exercice = new Exercice(consigne);
+        listeExercices.add(exercice);
     }
 
     public void ajouterQuestion(String prompt, Categorie categorie, TypeQuestion type, List<String> options, List<String> repense){
         Question question = new Question(prompt, categorie, type, options, repense);
         listeQuestions.add(question);
     }
+
+    public void ajouterQuestion(String prompt, Categorie categorie, TypeQuestion type){
+        Question question = new Question(prompt, categorie, type);
+        listeQuestions.add(question);
+    }
+
 
     public void ajouterObjectif(String nom, ObjectifCategorie categorie){
         Objectif obj = new Objectif(nom,categorie);
@@ -86,6 +99,11 @@ public class Ortho{
 
     public List<Question> getListeQuestions(){
         return listeQuestions;
+    }
+    public List<Exercice> getListeExercices(){return listeExercices;}
+
+    public String getNom(){
+        return nom;
     }
     
 

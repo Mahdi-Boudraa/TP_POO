@@ -32,9 +32,29 @@ public class TestExercice extends Test {
         return total;
     }
 
+    public void printExercicesDetails() {
+        for (ExercicePatient exo : listeExercices) {
+            System.out.println("Exercise: " + exo.getConsigne() + ", Response: " + exo.getReponse() + ", Score: " + exo.getScore());
+        }
+    }
+
 
 
     public List<ExercicePatient> getExercices() {
         return listeExercices;
+    }
+    public List<String> getExercice(){
+        List<String> list = new ArrayList<>();
+        for(ExercicePatient ques : listeExercices){
+            list.add(ques.getConsigne());
+        }
+        return list;
+    }
+    public List<String> getRepense(){
+        List<String> list = new ArrayList<>();
+        for(ExercicePatient ques : listeExercices){
+            list.add(ques.getReponse());
+        }
+        return list;
     }
 }

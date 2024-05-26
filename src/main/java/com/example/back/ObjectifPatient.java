@@ -10,6 +10,12 @@ public class ObjectifPatient {
         this.categorie= categorie;
     }
 
+    public ObjectifPatient(String nom,ObjectifCategorie categorie,int score){
+        this.nom=nom;
+        this.categorie=categorie;
+        this.score=score;
+    }
+
     public String getNom(){
         return nom;
     }

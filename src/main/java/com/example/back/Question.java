@@ -1,7 +1,8 @@
 package com.example.back;
+import java.io.Serializable;
 import java.util.List;
 
-public class Question {
+public class Question implements Serializable {
     private String prompt;
     private Categorie categorie;
     private TypeQuestion type;

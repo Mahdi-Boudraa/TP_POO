@@ -1,4 +1,5 @@
 package com.example.back;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BO {
@@ -6,7 +7,7 @@ public class BO {
     private Ortho ortho;
     private Patient patient;
     private Anamnese anamnese;
-    private EpreuveClinique epreuvesClinique;
+    private List<EpreuveClinique> epreuvesClinique;
     private Diagnostic diagnostics;
     private ProjetTherapeutique projets;
     private String nom;
@@ -16,6 +17,7 @@ public class BO {
     public BO(Ortho ortho,Patient patient){
         this.ortho= ortho;
         this.patient = patient;
+        epreuvesClinique = new ArrayList<>();
 
 
         patient.ajouterBO(this);
@@ -25,6 +27,7 @@ public class BO {
     public BO(Ortho ortho,List<Question> questions, String nom, String prenom, int age){
         this.ortho= ortho;
         Anamnese anamnese1 = new Anamnese(questions,age);
+        epreuvesClinique = new ArrayList<>();
         this.anamnese = anamnese1;
         this.nom=nom;
         this.prenom=prenom;
@@ -36,13 +39,13 @@ public class BO {
 
 
         EpreuveClinique epreuve = new EpreuveClinique(patient, questions,exercices);
-        this.epreuvesClinique = epreuve;
+        this.epreuvesClinique.add(epreuve);
     }
 
-    public void ajouterObservationEpreuve(String observation){
-        ObservationClinique observationClinique = new ObservationClinique(observation);
-        epreuvesClinique.setObservation(observationClinique);
+    public void ajouterEpreuveClinique(EpreuveClinique ec){
+        this.epreuvesClinique.add(ec);
     }
+
 
 
     public void ajouterDiagnostic(String nomTrouble, CategorieTrouble categorieTrouble){
@@ -57,7 +60,7 @@ public class BO {
         this.projets = proj;
     }
 
-    public EpreuveClinique getEpreuvesClinique(){
+    public List<EpreuveClinique> getEpreuvesClinique(){
         return epreuvesClinique;
     }
 
@@ -77,6 +80,17 @@ public class BO {
         patient.setAnamnese(anamnese);
 
     }
+
+    public ProjetTherapeutique getProjets(){
+        return projets;
+    }
+
+    public void ajouterDiagnostic(Diagnostic diagno){
+        this.diagnostics=diagno;
+
+    }
+
+
 
 
     
