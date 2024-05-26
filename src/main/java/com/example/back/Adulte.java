@@ -1,9 +1,11 @@
 package com.example.back;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Adulte extends Patient{
+public class Adulte extends Patient implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private String diplome;
     private String profession;
     private String numero;

@@ -11,18 +11,25 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Separator;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class Appointments implements Initializable {
@@ -233,6 +240,7 @@ public class Appointments implements Initializable {
     @FXML
     private Text date ;
 
+    private String selectedDay ;
     private String selectedMonth ;
     private String selectedYear ;
 
@@ -264,15 +272,60 @@ public class Appointments implements Initializable {
     }
 
     private void handleAnchorClicked(MouseEvent mouseEvent) {
+        rendezVous.getChildren().clear() ;
+        // Create the SVGPath graphic
+        SVGPath svgPath = new SVGPath();
+        svgPath.setContent("M12 2C12.5523 2 13 2.44772 13 3V11H21C21.5523 11 22 11.4477 22 12C22 12.5523 21.5523 13 21 13H13V21C13 21.5523 12.5523 22 12 22C11.4477 22 11 21.5523 11 21V13H3C2.44772 13 2 12.5523 2 12C2 11.4477 2.44772 11 3 11H11V3C11 2.44772 11.4477 2 12 2Z");
+        svgPath.setFill(javafx.scene.paint.Color.WHITE);
+
+        // Create the Button
+        Button button = new Button();
+        button.setLayoutX(176.0);
+        button.setLayoutY(11.0);
+        button.setMaxWidth(54.0);
+        button.setMinHeight(36.0);
+        button.setMinWidth(33.0);
+        button.setMnemonicParsing(false);
+        button.setPrefHeight(50.0);
+        button.setPrefWidth(33.0);
+        button.setStyle("-fx-background-radius: 50%; -fx-border-radius: 50%; -fx-min-width: 50px; -fx-min-height: 50px; -fx-max-width: 50px; -fx-max-height: 50px;");
+        button.getStyleClass().add("add-button");
+        button.setTextFill(Color.WHITE);
+        button.setGraphic(svgPath);
+        button.setOnAction(this::handleAddButtonClicked);
         getSelectedYear();
         getSelectedMonth();
         month.setText(selectedMonth + "-" + selectedYear);
+        // Create the Text element
+        Text text = new Text();
+        text.setLayoutX(14.0);
+        text.setLayoutY(42.0);
+        text.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
+        text.setStrokeWidth(0.0);
+        text.setStyle("-fx-font-weight: bold;");
+        text.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        text.setWrappingWidth(110.0);
+        text.setFont(new javafx.scene.text.Font("Product Sans Bold", 18.0));
+        rendezVous.getChildren().addAll(button,text) ;
+        // Create the Separator (Horizontal Line)
+        Separator separator = new Separator();
+        separator.setLayoutX(0); // Adjust the X position as needed
+        separator.setLayoutY(80.0); // Adjust the Y position as needed
+        separator.setPrefWidth(243.0);
+        separator.setPrefHeight(3.0); // Default height for horizontal line
+
+        // Adding Separator to the AnchorPane
+        rendezVous.getChildren().add(separator);
         processMonth(selectedMonth+"/"+selectedYear);
         AnchorPane sourcePane = (AnchorPane) mouseEvent.getSource();
+        String todayIs = "";
         for (int i = 0 ; i< 42 ; i++) {
             if (!texts[i].getText().isEmpty()) {
                 if (anchorPanes[i].equals(sourcePane)) {
                     anchorPanes[i].setStyle("-fx-background-color:  #90EE90; -fx-background-radius: 14;");
+                    todayIs = texts[i].getText() + "-" + selectedMonth + "-" + selectedYear ;
+                    selectedDay = texts[i].getText() ;
+                    text.setText(selectedDay+ "-" + selectedMonth + "-" + selectedYear);
                 }
                 else {
                     if (!(LocalDate.now().getDayOfMonth() == Integer.parseInt(texts[i].getText()))) {
@@ -281,7 +334,49 @@ public class Appointments implements Initializable {
                 }
             }
         }
-        AnchorPane anchorPane1 = new AnchorPane();
+
+        date.setText(todayIs);
+        String folderPath = DataSingleton.getInstance().getOrtho().getEmail() + "/rendez-vous-historique/" + selectedYear +"/" + removeLeadingZero(selectedMonth) + "/" + selectedDay ;
+        Consultation consultation = Consultation.readFromFile(folderPath + "/Consultation.bin") ;
+        if (consultation != null) {
+            AnchorPane anchorPane1 = new AnchorPane();
+
+            // Set properties for the AnchorPane
+            anchorPane1.setLayoutX(8.0);
+            anchorPane1.setLayoutY(85.0);
+            anchorPane1.setPrefWidth(222.0);
+            anchorPane1.setPrefHeight(65.0);
+            // FF8C00
+            anchorPane1.setStyle("-fx-background-color: #FF8C00; -fx-background-radius: 14;");
+            Text saDate = new Text(consultation.getDate().toString());
+            saDate.setStyle("-fx-font-weight: bold; -fx-font-family: 'Product Sans'; -fx-font-size: 12px; -fx-fill: white;");
+
+            anchorPane1.getChildren().add(saDate);
+            saDate.setLayoutX(10);
+            saDate.setLayoutY(20);
+
+            rendezVous.getChildren().add(anchorPane1);
+        }
+        else {
+            // Calculate the Y position for the new Text node
+            double maxY = 0;
+            for (javafx.scene.Node node : rendezVous.getChildren()) {
+                double nodeMaxY = node.getLayoutY() + node.getBoundsInParent().getHeight();
+                if (nodeMaxY > maxY) {
+                    maxY = nodeMaxY;
+                }
+            }
+            AnchorPane anchorPane2 = new AnchorPane();
+
+            // Set properties for the AnchorPane
+            anchorPane2.setLayoutX(10.0);
+            anchorPane2.setLayoutY(maxY + 10);
+            anchorPane2.setPrefWidth(222.0);
+            anchorPane2.setPrefHeight(65.0);
+            // 01D5FF
+            anchorPane2.setStyle("-fx-background-color: #01D5FF; -fx-background-radius: 14;");
+        }
+        /*AnchorPane anchorPane1 = new AnchorPane();
 
         // Set properties for the AnchorPane
         anchorPane1.setLayoutX(8.0);
@@ -311,7 +406,7 @@ public class Appointments implements Initializable {
         anchorPane3.setStyle("-fx-background-color: #28A745; -fx-background-radius: 14;");
         rendezVous.getChildren().add(anchorPane1) ;
         rendezVous.getChildren().add(anchorPane2) ;
-        rendezVous.getChildren().add(anchorPane3) ;
+        rendezVous.getChildren().add(anchorPane3) ;*/
     }
     private void initializeTexts() {
         texts = new Text[]{
@@ -330,7 +425,7 @@ public class Appointments implements Initializable {
         int currentYear = LocalDate.now().getYear();
 
         // Add items to the ChoiceBox with years from -5 to +5 years relative to the current year
-        for (int year = currentYear - 5; year <= currentYear + 5; year++) {
+        for (int year = currentYear ; year < currentYear + 3; year++) {
             yearsChoiceBox.getItems().add(String.valueOf(year));
         }
 
@@ -352,6 +447,7 @@ public class Appointments implements Initializable {
         Month currentMonth = LocalDate.now().getMonth();
         int monthIndex = currentMonth.getValue(); // Get the month as an integer (1-12)
         selectedMonth = months[monthIndex-1];
+        System.out.println(selectedMonth);
         monthsChoiceBox.setValue(selectedMonth);
     }
 
@@ -360,6 +456,12 @@ public class Appointments implements Initializable {
         getSelectedMonth();
         month.setText(selectedMonth + "-" + selectedYear);
         processMonth(selectedMonth+"/"+selectedYear);
+        date.setText(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
+        LocalDate currentDate = LocalDate.now();
+
+        // Format the current day as "dd"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd");
+        selectedDay = currentDate.format(formatter);
     }
 
     private void getSelectedMonth() {
@@ -471,6 +573,58 @@ public class Appointments implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void handleAddButtonClicked(Event event) {
+        try {
+            String selectedDate = DataSingleton.getInstance().getOrtho().getEmail() + "/rendez-vous-historique/" + selectedYear + "/" + selectedMonth + "/" + selectedDay;
+            // get and Set data in the singleton
+            DataSingleton.getInstance().setData(DataSingleton.getInstance().getOrtho().getEmail() + "/rendez-vous-historique/" + selectedYear + "/" + removeLeadingZero(selectedMonth) + "/" + selectedDay);
+            DataSingleton.getInstance().setDate(selectedYear + "-" + selectedMonth + "-" + selectedDay);
+
+            String fxmlFilePath = "/com/example/tppoo/add-appointment.fxml";
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFilePath));
+            Scene newScene = new Scene(loader.load(), 600, 570);
+
+            // Load the icon image
+            Image icon = new Image("file:C:/Users/ya727/Desktop/TP_POO/src/main/resources/com/example/tppoo/pictures/logo_blue.png");
+
+            // Get the current stage (assuming the event source is a Node)
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Create a new stage for the new scene
+            Stage newStage = new Stage();
+            newStage.getIcons().add(icon);
+            newStage.setTitle("Add Appointment");
+            newStage.setScene(newScene);
+            newStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Display an error message to the user
+            showErrorDialog("Error loading the FXML file", "Could not load the add-appointment.fxml file.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle other exceptions
+            showErrorDialog("Unexpected Error", "An unexpected error occurred.");
+        }
+    }
+
+    private void showErrorDialog(String title, String message) {
+        // You can use an Alert dialog to show the error message
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public static String removeLeadingZero(String month) {
+        if (month.startsWith("0")) {
+            return month.substring(1);
+        }
+        return month;
     }
 
     @FXML

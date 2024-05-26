@@ -1,5 +1,9 @@
 package com.example.back;
-public class ConclusionTest {
+
+import java.io.Serializable;
+
+public class ConclusionTest implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Test test;
     private String conclusion;
 

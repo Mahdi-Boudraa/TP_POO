@@ -1,6 +1,8 @@
 package com.example.back;
+import java.io.Serializable;
 import java.time.LocalDateTime;
-public class Enfant extends Patient {
+public class Enfant extends Patient implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String classeEtude;
     private String numParent1;
     private String numParent2;

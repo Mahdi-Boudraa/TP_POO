@@ -1,10 +1,13 @@
 package com.example.back;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Ortho{
+public class Ortho implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String nom;
     private String prenom;
     private String adress;
@@ -19,7 +22,15 @@ public class Ortho{
     private List<Question> listeQuestions;
     private List<Objectif> listeObjectifs;
 
-    public Ortho(String nom,String prenom,String adress,String tlph,String email, String motDePasse){
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public Ortho(String nom, String prenom, String adress, String tlph, String email, String motDePasse){
         this.nom=nom;
         this.prenom=prenom;
         this.adress=adress;
@@ -87,7 +98,45 @@ public class Ortho{
     public List<Question> getListeQuestions(){
         return listeQuestions;
     }
-    
 
 
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTlph() {
+        return tlph;
+    }
+
+    public void setTlph(String tlph) {
+        this.tlph = tlph;
+    }
+
+    public String getMotDePasse() {
+        return motDePasse;
+    }
+
+    public void setMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
+    }
 }

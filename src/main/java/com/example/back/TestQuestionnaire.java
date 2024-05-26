@@ -1,15 +1,17 @@
 package com.example.back;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestQuestionnaire extends Test {
+public class TestQuestionnaire extends Test implements Serializable {
+    private static final long serialVersionUID = 1L;
     private List<QuestionPatient> listquestions;
 
     public TestQuestionnaire(Patient patient,String nom, List<Question> questions) {
         super(patient,nom);
         listquestions = new ArrayList<>();
         for(Question quest: questions){
-            QuestionPatient questpation = new QuestionPatient(quest.getPrompt(), quest.getCategorie(), quest.getType(),quest.getOtions(),quest.getRepense());
+            QuestionPatient questpation = new QuestionPatient(quest.getPrompt(), quest.getCategorie(), quest.getType(),quest.getOptions(),quest.getRepense());
             listquestions.add(questpation);
         }
     }

@@ -1,8 +1,10 @@
 package com.example.back;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Test {
+public abstract class Test implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Patient patient;
     private String nom;
     private ConclusionTest conclusion;

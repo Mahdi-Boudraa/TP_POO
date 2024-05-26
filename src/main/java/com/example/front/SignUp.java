@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class SignUp {
 
@@ -71,16 +72,11 @@ public class SignUp {
                         writer.newLine();
                         writer.write(initialStatistics.getIndex3());
                         writer.newLine();
-                        System.out.println("Field values have been written to patient.txt");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/com/example/front/current.txt"))) {
-                        writer.write(userEmail);
-                        writer.newLine();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    Ortho ortho = new Ortho(userLastName,userFirstName,userAddress,userPhoneNumber,userEmail,userPassword) ;
+                    DataSingleton.getInstance().setOrtho(ortho);
                     account.add(userFirstName);
                     account.add(userLastName);
                     account.add(userPhoneNumber);
@@ -88,6 +84,35 @@ public class SignUp {
                     account.add(userEmail);
                     account.add(userPassword);
                     FilesHandlingFunctions.writeLinesToFile(userEmail+"/doctor_data",account);
+                    FilesHandlingFunctions.createFolderIfNotExists(userEmail+"/rendez-vous-historique");
+                    FilesHandlingFunctions.createFileIfNotExists(userEmail+"/anamneses.bin");
+                    FilesHandlingFunctions.createFileIfNotExists(userEmail+"/question_libre.bin") ;
+                    FilesHandlingFunctions.createFileIfNotExists(userEmail+"/qcu.bin");
+                    FilesHandlingFunctions.createFileIfNotExists(userEmail+"/qcm.bin");
+                    FilesHandlingFunctions.createFileIfNotExists(userEmail+"/exos.bin");
+                    // Loop to get the next 3 years as strings
+                    // Get the current year
+                    Calendar calendar = Calendar.getInstance();
+                    int currentYear = calendar.get(Calendar.YEAR);
+                    for (int i = 0; i < 3; i++) {
+                        int year = currentYear + i;
+                        String yearString = Integer.toString(year);
+                        FilesHandlingFunctions.createFolderIfNotExists(userEmail+"/rendez-vous-historique/"+yearString) ;
+                        for (int j = 1 ; j<=12; j++) {
+                            String monthString = Integer.toString(j);
+                            FilesHandlingFunctions.createFolderIfNotExists(userEmail+"/rendez-vous-historique/"+yearString+"/"+monthString);
+                            int daysNumber = getDaysInMonth(year,j) ;
+                            for (int k = 1 ; k<= daysNumber ; k++) {
+                                String dayString = Integer.toString(k);
+                                FilesHandlingFunctions.createFolderIfNotExists(userEmail+"/rendez-vous-historique/"+yearString+"/"+monthString+"/"+dayString) ;
+                                FilesHandlingFunctions.createFileIfNotExists(userEmail+"/rendez-vous-historique/"+yearString+"/"+monthString+"/"+dayString+"/Consultation.bin");
+                                FilesHandlingFunctions.createFileIfNotExists(userEmail+"/rendez-vous-historique/"+yearString+"/"+monthString+"/"+dayString+"/Suivie.bin");
+                                FilesHandlingFunctions.createFileIfNotExists(userEmail+"/rendez-vous-historique/"+yearString+"/"+monthString+"/"+dayString+"/Atelier.bin");
+
+                            }
+
+                        }
+                    }
                 }
                 try {
                     // Load the Second side
@@ -113,6 +138,16 @@ public class SignUp {
                     "-fx-font-size: 18;");
         }
 
+    }
+
+    public static int getDaysInMonth(int year, int month) {
+        // Create a Calendar instance and set the year and month
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month - 1); // Subtract 1 because months are 0-based in Calendar
+
+        // Get the number of days in the month
+        return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     }
 
 

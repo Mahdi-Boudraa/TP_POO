@@ -1,4 +1,7 @@
 package com.example.back;
-public enum TypeQuestion {
+
+import java.io.Serializable;
+
+public enum TypeQuestion implements Serializable {
     LIBRE, QCU, QCM
 }

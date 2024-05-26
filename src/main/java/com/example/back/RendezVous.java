@@ -1,12 +1,19 @@
 package com.example.back;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class RendezVous {
-    
+public class RendezVous implements Serializable {
+
+    private static final long serialVersionUID = 1L;  // Add serialVersionUID
     private Ortho orthophonist;
     private LocalDateTime dateTime;
     private Patient patient;
+
+    public String getDuree() {
+        return Duree;
+    }
+
     private String Duree;
     private String observation;
     private List<Patient> patientList;

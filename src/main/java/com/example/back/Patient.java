@@ -1,4 +1,5 @@
 package com.example.back;
+import java.io.Serializable;
 import java.time.Instant;
 
 import java.time.LocalDateTime;
@@ -7,7 +8,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
-public class Patient {
+public class Patient implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Ortho orthophonist;
     private int numPatient;
     private String nom;

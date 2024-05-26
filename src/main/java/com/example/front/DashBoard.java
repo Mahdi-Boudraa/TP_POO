@@ -51,14 +51,11 @@ public class DashBoard implements Initializable {
 
     public void initialize (URL url , ResourceBundle rb) {
 
-        //fill doctor name
-        String orthoEmail = FilesHandlingFunctions.readLinesFromFile("src/main/java/com/example/front/current.txt").get(0);
-        ArrayList<String> orthoData = FilesHandlingFunctions.readLinesFromFile(orthoEmail+"/doctor_data") ;
-        Ortho doctor = new Ortho(orthoData.get(1),orthoData.get(0),orthoData.get(3),orthoData.get(2),orthoData.get(4),orthoData.get(5)) ;
-        doctorName.setText("Dr. " + orthoData.get(1) + " " + orthoData.get(0));
+        Ortho doctor = DataSingleton.getInstance().getOrtho(); ;
+        doctorName.setText("Dr. " + doctor.getNom() + " " + doctor.getPrenom());
         doctorName.setStyle("-fx-fill: #0282c2; -fx-font-weight: bold; -fx-text-alignment: left;");
         // fill statistics
-        Statistics stats = FilesHandlingFunctions.readStatisticsFromFile(orthoEmail + "/statistiques.bin");
+        Statistics stats = FilesHandlingFunctions.readStatisticsFromFile(doctor.getEmail() + "/statistiques.bin");
         index1.setText(String.valueOf(stats.getIndex1()));
         index1.setStyle("-fx-fill: #ffffff; -fx-font-family: Product Sans Bold ; -fx-font-weight: bold;");
         index2.setText(String.valueOf(stats.getIndex2()));

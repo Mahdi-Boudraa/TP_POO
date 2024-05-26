@@ -6,7 +6,8 @@ import com.example.front.Statistics;
 import java.io.*;
 import java.util.ArrayList;
 
-public class FilesHandlingFunctions {
+public class FilesHandlingFunctions implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     public static ArrayList<String> getEmailsList(String filePath) {
         ArrayList<String> emailsList = new ArrayList<>();

@@ -1,8 +1,10 @@
 package com.example.back;
+import java.io.Serializable;
 import java.util.List;
 
-public class BO {
+public class BO implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private Ortho ortho;
     private Patient patient;
     private Anamnese anamnese;
