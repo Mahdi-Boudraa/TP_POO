@@ -1,9 +1,11 @@
 package com.example.back;
+import java.io.Serializable;
 import java.util.Set;
 import java.util.HashSet;
 
 
-public class Diagnostic {
+public class Diagnostic implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Patient patient;
     private Set<Trouble> troubles;
 

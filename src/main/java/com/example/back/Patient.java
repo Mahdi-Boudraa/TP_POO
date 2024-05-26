@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
 public class Patient implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Ortho orthophonist;
     private int numPatient;
     private String nom;
@@ -59,6 +60,7 @@ public class Patient implements Serializable {
         this.listeDesFichesDeSuivie = new ArrayList<>();
         this.listeTroubles = new ArrayList<>();
         this.orthophonist=ortho;
+
         orthophonist.ajouterPatient(this);
     }
 

@@ -1,5 +1,8 @@
 package com.example.back;
 
-public enum ObjectifCategorie {
+import java.io.Serializable;
+
+public enum ObjectifCategorie implements Serializable {
+
     COURT,MOYEN,LONG
 }

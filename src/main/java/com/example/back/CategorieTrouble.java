@@ -1,4 +1,7 @@
 package com.example.back;
-public enum CategorieTrouble {
+
+import java.io.Serializable;
+
+public enum CategorieTrouble implements Serializable {
     DEGLUTITION, NEURO_DEVELOPPEMENTAUX, COGNITIFS
 }

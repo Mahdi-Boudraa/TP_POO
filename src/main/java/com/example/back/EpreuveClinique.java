@@ -1,7 +1,9 @@
 package com.example.back;
+import java.io.Serializable;
 import java.util.List;
 
-public class EpreuveClinique {
+public class EpreuveClinique implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Patient patient;
     private BO bo;

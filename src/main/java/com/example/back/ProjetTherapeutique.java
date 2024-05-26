@@ -1,5 +1,9 @@
 package com.example.back;
-public class ProjetTherapeutique {
+
+import java.io.Serializable;
+
+public class ProjetTherapeutique implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String demarche;
 
     public ProjetTherapeutique(String Demarche){

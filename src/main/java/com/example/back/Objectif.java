@@ -1,5 +1,9 @@
 package com.example.back;
-public class Objectif {
+
+import java.io.Serializable;
+
+public class Objectif implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String nom;
     private ObjectifCategorie categorie;
 

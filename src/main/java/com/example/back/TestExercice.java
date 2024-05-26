@@ -1,9 +1,11 @@
 package com.example.back;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class TestExercice extends Test {
+public class TestExercice extends Test implements Serializable {
+    private static final long serialVersionUID = 1L;
     private List<ExercicePatient> listeExercices;
 
     public TestExercice(Patient patient,String nom,List<Exercice> exercices) {

@@ -43,12 +43,9 @@ public class LogIn {
                 emailNotExisting.setText("");
                 wrongPassword.setText("");
                 try {
-                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/com/example/front/current.txt"))) {
-                        writer.write(userEmail);
-                        writer.newLine();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    ArrayList<String> doctorData = FilesHandlingFunctions.readLinesFromFile(userEmail+"/doctor_data");
+                    Ortho ortho = new Ortho(doctorData.get(1),doctorData.get(0),doctorData.get(3),doctorData.get(2),doctorData.get(4),doctorData.get(5));
+                    DataSingleton.getInstance().setOrtho(ortho);
                     // Load the Second side
                     Parent secondView = FXMLLoader.load(getClass().getResource("/com/example/tppoo/dashboard.fxml"));
                     Scene secondScene = new Scene(secondView);

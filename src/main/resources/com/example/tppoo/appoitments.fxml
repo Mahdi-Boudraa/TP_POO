@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -191,13 +192,19 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="rendezVous" layoutX="749.0" layoutY="144.0" prefHeight="528.0" prefWidth="240.0" style="-fx-background-color: white; -fx-background-radius: 14;">
+            <AnchorPane fx:id="rendezVous" layoutX="749.0" layoutY="138.0" prefHeight="534.0" prefWidth="240.0" style="-fx-background-color: white; -fx-background-radius: 14;">
                <children>
-                  <Text fx:id="date" layoutX="36.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" textAlignment="CENTER" wrappingWidth="168.0">
+                  <Text fx:id="date" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" textAlignment="CENTER" wrappingWidth="110.0">
                      <font>
-                        <Font name="Product Sans Bold" size="24.0" />
+                        <Font name="Product Sans Bold" size="18.0" />
                      </font>
                   </Text>
+                  <Button layoutX="176.0" layoutY="11.0" maxWidth="54.0" minHeight="36.0" minWidth="33.0" mnemonicParsing="false" onAction="#handleAddButtonClicked" prefHeight="50.0" prefWidth="33.0" style="-fx-background-radius: 50%; -fx-border-radius: 50%; -fx-min-width: 50px; -fx-min-height: 50px; -fx-max-width: 50px; -fx-max-height: 50px;" styleClass="add-button" textFill="WHITE">
+                     <graphic>
+                        <SVGPath content="M12 2C12.5523 2 13 2.44772 13 3V11H21C21.5523 11 22 11.4477 22 12C22 12.5523 21.5523 13 21 13H13V21C13 21.5523 12.5523 22 12 22C11.4477 22 11 21.5523 11 21V13H3C2.44772 13 2 12.5523 2 12C2 11.4477 2.44772 11 3 11H11V3C11 2.44772 11.4477 2 12 2Z" fill="WHITE" />
+                     </graphic>
+                  </Button>
+                  <Separator layoutY="80.0" prefHeight="3.0" prefWidth="243.0" />
                </children></AnchorPane>
             <AnchorPane fx:id="anchor1" layoutX="185.0" layoutY="190.0" prefHeight="75.0" prefWidth="64.0" style="-fx-background-color: white; -fx-background-radius: 14;">
                <children>
