@@ -39,4 +39,5 @@ public class ExercicePatient {
     public void setReponse(String reponse){
         this.reponse = reponse;
     }
+
 }

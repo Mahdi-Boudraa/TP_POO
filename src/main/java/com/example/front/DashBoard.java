@@ -1,4 +1,10 @@
 package com.example.front;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.FileNotFoundException;
 import com.example.back.*;
 
 import javafx.event.Event;
@@ -15,7 +21,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class DashBoard implements Initializable {
@@ -55,6 +63,30 @@ public class DashBoard implements Initializable {
         String orthoEmail = FilesHandlingFunctions.readLinesFromFile("src/main/java/com/example/front/current.txt").get(0);
         ArrayList<String> orthoData = FilesHandlingFunctions.readLinesFromFile(orthoEmail+"/doctor_data") ;
         Ortho doctor = new Ortho(orthoData.get(1),orthoData.get(0),orthoData.get(3),orthoData.get(2),orthoData.get(4),orthoData.get(5)) ;
+        Patient pat1 = new Enfant(doctor,"allag","yacine",LocalDateTime.now(),"Tebessa","Eplf","2CP","12345","56789");
+        Patient pat2 = new Patient(doctor,"mahdi","mohamed",LocalDateTime.now(),"Alger","bouraoui",false);
+
+        doctor.ajouterQuestion("what is your name",Categorie.CHARACTER_BEHAVIOR,TypeQuestion.LIBRE);
+        doctor.ajouterQuestion("what do you see",Categorie.MEDICAL_FOLLOWUP,TypeQuestion.QCM, Arrays.asList("option1","option2","option3"),Arrays.asList("option1","option2"));
+        doctor.ajouterQuestion("wkkkkkkkk",Categorie.CHARACTER_BEHAVIOR,TypeQuestion.LIBRE);
+        doctor.ajouterExercice("how would you describe yourself");
+        RendezVous rdv = new RendezVous(doctor,pat1,LocalDateTime.now(),"doog night");
+
+
+
+
+        // Serialize the doctor object
+        try (FileOutputStream fileOut = new FileOutputStream("doc.ser");
+             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+            out.writeObject(doctor);
+            System.out.println("Serialized data is saved in doc.ser");
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+
+        // Deserialize the doctor object
+
+
         doctorName.setText("Dr. " + orthoData.get(1) + " " + orthoData.get(0));
         doctorName.setStyle("-fx-fill: #0282c2; -fx-font-weight: bold; -fx-text-alignment: left;");
         // fill statistics

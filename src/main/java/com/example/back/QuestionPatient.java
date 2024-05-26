@@ -8,6 +8,7 @@ public class QuestionPatient {
     private List<String> options; // Pour QCU et QCM
     private List<String> repense;
     private int score;
+    private String repensePatient;
 
     public QuestionPatient(String question, Categorie categorie, TypeQuestion type) {
         this.question = question;
@@ -51,5 +52,14 @@ public class QuestionPatient {
     public void setScore(int score){
         this.score=score;
     }
+
+    public void setRepensePatient(String repense){
+        this.repensePatient=repense;
+    }
+
+    public String getRepensePatient(){
+        return repensePatient;
+    }
 }
+
 

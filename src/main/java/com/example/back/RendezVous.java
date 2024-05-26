@@ -1,8 +1,9 @@
 package com.example.back;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class RendezVous {
+public class RendezVous implements Serializable {
     
     private Ortho orthophonist;
     private LocalDateTime dateTime;
@@ -34,6 +35,10 @@ public class RendezVous {
         this.orthophonist=orthophonist;
         this.dateTime=dateTime;
         orthophonist.ajouterRendezVous(this);
+    }
+
+    public String getObservation(){
+        return observation;
     }
 
     public RendezVous(Ortho orthophonist,List<Patient> patientList,LocalDateTime dateTime){

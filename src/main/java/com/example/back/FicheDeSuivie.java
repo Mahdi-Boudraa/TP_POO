@@ -3,11 +3,13 @@ import java.util.List;
 import java.util.ArrayList;
 public class FicheDeSuivie {
     private List<ObjectifPatient> listeObjectifsPatient;
+    private List<Objectif> listeObjectifs;
     private Patient patient;
     private Ortho ortho;
 
-    public FicheDeSuivie(Ortho ortho,Patient patient,List<Objectif> listeObjectifs){
+    public FicheDeSuivie(Ortho ortho, Patient patient, List<Objectif> listeObjectifs){
         this.ortho=ortho;
+        this.listeObjectifs=listeObjectifs;
         listeObjectifsPatient = new ArrayList<>();
         for(Objectif obj : listeObjectifs){
             ObjectifPatient objPat= new ObjectifPatient(obj.getNom(),obj.getCategorie());
@@ -15,6 +17,21 @@ public class FicheDeSuivie {
         }
         patient.ajouteFicheDeSuivie(this);
         patient.setFicheDeSuivie(this);
+    }
+
+    public FicheDeSuivie(Patient patient,List<ObjectifPatient> listeObjectifsPatient){
+        this.patient=patient;
+        this.listeObjectifsPatient=listeObjectifsPatient;
+        patient.getListeDesFichesDeSuivie().add(this);
+        patient.setFicheDeSuivie(this);
+    }
+
+    public List<ObjectifPatient> getListeObjectifsPatient(){
+        return listeObjectifsPatient;
+    }
+
+    public List<Objectif> getListeObjectifs(){
+        return listeObjectifs;
     }
     
 }
