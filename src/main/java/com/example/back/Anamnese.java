@@ -10,7 +10,7 @@ public class Anamnese implements Serializable {
     public Anamnese(List<Question> quests,int age) {
         questions = new ArrayList<>();
         for(Question quest: quests){
-            QuestionPatient questpation = new QuestionPatient(quest.getPrompt(), quest.getCategorie(), quest.getType(),quest.getOptions(),quest.getRepense());
+            QuestionPatient questpation = new QuestionPatient(quest.getPrompt(), quest.getCategorie(), quest.getType(),quest.getOtions(),quest.getRepense());
             questions.add(questpation);
         }
 

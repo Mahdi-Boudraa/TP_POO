@@ -165,16 +165,27 @@ public class PatientDetailsController {
 
         // Load appointments data into the appointments table
         List<RendezVous> rendezVousList = patient.getListRendezVous(); // Ensure this method exists in Patient class to get Rendez-vous list
+//        for(RendezVous rdv : rendezVousList){
+//            System.out.println(rdv.getDate());
+//
+//        }
         ObservableList<AppointmentRecord> appointmentsData = FXCollections.observableArrayList();
 
         for (RendezVous rendezVous : rendezVousList) {
             AppointmentRecord appointmentRecord = new AppointmentRecord(rendezVous.getDate().toString(), rendezVous.getObservation());
             appointmentsData.add(appointmentRecord);
         }
+        for(AppointmentRecord rec : appointmentsData){
+            System.out.println(rec.getDate());
+        }
 
         table_appointments.setItems(appointmentsData);
 
         // Load objectifs data into the objectifs table
+        if (patient.getFicheDeSuivie() == null) {
+            FicheDeSuivie ficheDeSuivie = new FicheDeSuivie(patient.getOrtho(), patient, FXCollections.observableArrayList());
+            patient.setFicheDeSuivie(ficheDeSuivie);
+        }
         List<ObjectifPatient> objectifsList = patient.getFicheDeSuivie().getListeObjectifsPatient(); // Ensure this method exists in Patient class to get Objectif list
         ObservableList<ObjectifRecord> objectifsData = FXCollections.observableArrayList();
 

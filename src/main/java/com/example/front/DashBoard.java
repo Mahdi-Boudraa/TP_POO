@@ -13,11 +13,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.time.LocalDateTime;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class DashBoard implements Initializable {
@@ -57,14 +61,9 @@ public class DashBoard implements Initializable {
         String orthoEmail = FilesHandlingFunctions.readLinesFromFile("src/main/java/com/example/front/current.txt").get(0);
         ArrayList<String> orthoData = FilesHandlingFunctions.readLinesFromFile(orthoEmail+"/doctor_data") ;
         Ortho doctor = new Ortho(orthoData.get(1),orthoData.get(0),orthoData.get(3),orthoData.get(2),orthoData.get(4),orthoData.get(5)) ;
-        Patient pat1 = new Enfant(doctor,"allag","yacine",LocalDateTime.now(),"Tebessa","Eplf","2CP","12345","56789");
-        Patient pat2 = new Patient(doctor,"mahdi","mohamed",LocalDateTime.now(),"Alger","bouraoui",false);
 
-        doctor.ajouterQuestion("what is your name",Categorie.CHARACTER_BEHAVIOR,TypeQuestion.LIBRE);
-        doctor.ajouterQuestion("what do you see",Categorie.MEDICAL_FOLLOWUP,TypeQuestion.QCM, Arrays.asList("option1","option2","option3"),Arrays.asList("option1","option2"));
-        doctor.ajouterQuestion("wkkkkkkkk",Categorie.CHARACTER_BEHAVIOR,TypeQuestion.LIBRE);
-        doctor.ajouterExercice("how would you describe yourself");
-        RendezVous rdv = new RendezVous(doctor,pat1,LocalDateTime.now(),"doog night");
+        DataSingleton.getInstance().setOrtho(doctor);
+
 
 
 

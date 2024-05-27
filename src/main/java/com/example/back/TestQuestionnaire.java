@@ -11,10 +11,11 @@ public class TestQuestionnaire extends Test implements Serializable {
         super(patient,nom);
         listquestions = new ArrayList<>();
         for(Question quest: questions){
-            QuestionPatient questpation = new QuestionPatient(quest.getPrompt(), quest.getCategorie(), quest.getType(),quest.getOptions(),quest.getRepense());
+            QuestionPatient questpation = new QuestionPatient(quest.getPrompt(), quest.getCategorie(), quest.getType(),quest.getOtions(),quest.getRepense());
             listquestions.add(questpation);
         }
     }
+
 
     public List<QuestionPatient> getQuestions() {
         return listquestions;

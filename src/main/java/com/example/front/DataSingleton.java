@@ -7,7 +7,7 @@ public class DataSingleton {
     private static DataSingleton instance;
     private String data;
     private Ortho ortho ;
-    private Question question ;
+    private QuestionFront question ;
 
     public Exercice getExercice() {
         return exercice;
@@ -28,11 +28,11 @@ public class DataSingleton {
         this.tab = tab;
     }
 
-    public Question getQuestion() {
+    public QuestionFront getQuestion() {
         return question;
     }
 
-    public void setQuestion(Question question) {
+    public void setQuestion(QuestionFront question) {
         this.question = question;
     }
 

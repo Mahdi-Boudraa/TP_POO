@@ -71,6 +71,7 @@ public class Patient implements Serializable {
         return (int) (currentTimeMillis % Integer.MAX_VALUE) + randomNumber;
     }
 
+
     public int getPatientId() {
         return numPatient;
     }
@@ -163,4 +164,5 @@ public class Patient implements Serializable {
     public Ortho getOrtho(){
         return orthophonist;
     }
+
 }

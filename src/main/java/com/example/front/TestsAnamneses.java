@@ -28,17 +28,17 @@ public class TestsAnamneses implements Initializable {
     @FXML
     private ChoiceBox<String> choiceBox;
     @FXML
-    private TableView<Question> tableView;
+    private TableView<QuestionFront> tableView;
     @FXML
-    private TableColumn<Question, String> nameColumn;
+    private TableColumn<QuestionFront, String> nameColumn;
     @FXML
-    private TableColumn<Question, String> questionsColumn;
+    private TableColumn<QuestionFront, String> questionsColumn;
     @FXML
-    private TableColumn<Question, String> typesColumn;
+    private TableColumn<QuestionFront, String> typesColumn;
     @FXML
-    private TableColumn<Question, String> responsesColumn;
+    private TableColumn<QuestionFront, String> responsesColumn;
     @FXML
-    private TableColumn<Question, Void> operationsColumn;
+    private TableColumn<QuestionFront, Void> operationsColumn;
     @FXML
     private TableView<Exercice> tableView2;
     @FXML
@@ -61,7 +61,7 @@ public class TestsAnamneses implements Initializable {
     private Tab tab3;
     private int tabNumber = 1 ;
 
-    private ObservableList<Question> questionData = FXCollections.observableArrayList();
+    private ObservableList<QuestionFront> questionData = FXCollections.observableArrayList();
     private ObservableList<Exercice> exoData = FXCollections.observableArrayList();
     private ObservableList<Anamnese> anamneseData = FXCollections.observableArrayList();
 
@@ -95,14 +95,14 @@ public class TestsAnamneses implements Initializable {
         allQuestions.addAll(qcms);
 
         for (com.example.back.Question question : allQuestions) {
-            Question question1 = null;
+            QuestionFront question1 = null;
             if (question.getType().equals(TypeQuestion.LIBRE)) {
-                question1 = new Question(question.getPrompt(), "LIBRE", "NONE", "Edit/Delete");
+                question1 = new QuestionFront(question.getPrompt(), "LIBRE", "NONE", "Edit/Delete");
             } else if (question.getType().equals(TypeQuestion.QCM)) {
                 String reponses = String.join(" ", question.getRepense());
-                question1 = new Question(question.getPrompt(), "QCM", reponses, "Edit/Delete");
+                question1 = new QuestionFront(question.getPrompt(), "QCM", reponses, "Edit/Delete");
             } else if (question.getType().equals(TypeQuestion.QCU)) {
-                question1 = new Question(question.getPrompt(), "QCU", question.getRepense().get(0), "Edit/Delete");
+                question1 = new QuestionFront(question.getPrompt(), "QCU", question.getRepense().get(0), "Edit/Delete");
             }
             questionData.add(question1);
         }
@@ -118,10 +118,10 @@ public class TestsAnamneses implements Initializable {
     }
 
     private void setupOperationsColumn() {
-        operationsColumn.setCellFactory(new Callback<TableColumn<Question, Void>, TableCell<Question, Void>>() {
+        operationsColumn.setCellFactory(new Callback<TableColumn<QuestionFront, Void>, TableCell<QuestionFront, Void>>() {
             @Override
-            public TableCell<Question, Void> call(final TableColumn<Question, Void> param) {
-                return new TableCell<Question, Void>() {
+            public TableCell<QuestionFront, Void> call(final TableColumn<QuestionFront, Void> param) {
+                return new TableCell<QuestionFront, Void>() {
 
                     private final Button editButton = new Button("Edit");
                     private final Button deleteButton = new Button("Delete");
@@ -129,12 +129,12 @@ public class TestsAnamneses implements Initializable {
 
                     {
                         editButton.setOnAction((ActionEvent event) -> {
-                            Question data = getTableView().getItems().get(getIndex());
+                            QuestionFront data = getTableView().getItems().get(getIndex());
                             handleEditButton(data);
                         });
 
                         deleteButton.setOnAction((ActionEvent event) -> {
-                            Question data = getTableView().getItems().get(getIndex());
+                            QuestionFront data = getTableView().getItems().get(getIndex());
                             handleDeleteButton(data);
                         });
                     }
@@ -294,27 +294,27 @@ public class TestsAnamneses implements Initializable {
         allQuestions.addAll(qcus);
         allQuestions.addAll(qcms);
         for (com.example.back.Question question : allQuestions) {
-            Question question1 = null;
+            QuestionFront question1 = null;
             if (question.getType().equals(TypeQuestion.LIBRE)) {
-                question1 = new Question(question.getPrompt(), "LIBRE", "NONE", "Edit/Delete");
+                question1 = new QuestionFront(question.getPrompt(), "LIBRE", "NONE", "Edit/Delete");
             } else if (question.getType().equals(TypeQuestion.QCM)) {
                 String reponses = String.join("-", question.getRepense());
-                question1 = new Question(question.getPrompt(), "QCM", reponses, "Edit/Delete");
+                question1 = new QuestionFront(question.getPrompt(), "QCM", reponses, "Edit/Delete");
             } else if (question.getType().equals(TypeQuestion.QCU)) {
-                question1 = new Question(question.getPrompt(), "QCU", question.getRepense().get(0), "Edit/Delete");
+                question1 = new QuestionFront(question.getPrompt(), "QCU", question.getRepense().get(0), "Edit/Delete");
             }
             questionData.add(question1);
         }
         tableView.setItems(questionData);
     }
 
-    private void handleDeleteButton(Question data) {
+    private void handleDeleteButton(QuestionFront data) {
         Ortho ortho = DataSingleton.getInstance().getOrtho();
         questionData.remove(data);
         //System.out.println("Edit: " + data.getPrompt());
     }
 
-    private void handleEditButton(Question data) {
+    private void handleEditButton(QuestionFront data) {
         DataSingleton.getInstance().setQuestion(data);
         try {
             String fxmlFilePath = "/com/example/tppoo/add_question.fxml";

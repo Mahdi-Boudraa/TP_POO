@@ -2,13 +2,13 @@ package com.example.front;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class Question {
+public class QuestionFront {
     private final SimpleStringProperty questions;
     private final SimpleStringProperty types;
     private final SimpleStringProperty responses;
     private final SimpleStringProperty operations;
 
-    public Question(String questions, String types, String responses, String operations) {
+    public QuestionFront(String questions, String types, String responses, String operations) {
         this.questions = new SimpleStringProperty(questions);
         this.types = new SimpleStringProperty(types);
         this.responses = new SimpleStringProperty(responses);

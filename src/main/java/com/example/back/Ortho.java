@@ -2,14 +2,10 @@ package com.example.back;
 import java.io.Serializable;
 
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class Ortho implements Serializable {
-    private static final long serialVersionUID = 1L;
-
+public class Ortho implements Serializable{
     private String nom;
     private String prenom;
     private String adress;
@@ -24,15 +20,7 @@ public class Ortho implements Serializable {
     private List<Question> listeQuestions;
     private List<Objectif> listeObjectifs;
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public Ortho(String nom, String prenom, String adress, String tlph, String email, String motDePasse){
+    public Ortho(String nom,String prenom,String adress,String tlph,String email, String motDePasse){
         this.nom=nom;
         this.prenom=prenom;
         this.adress=adress;
@@ -55,14 +43,20 @@ public class Ortho implements Serializable {
     }
 
     public Patient getPatient(int numDossier){
-        for ( Patient pat : listePatient){
-            if(pat.getPatientId()==numDossier){
-                return pat;
+        System.out.println("Searching in Ortho class for patient with numero: " + numDossier);
+        for (Patient patient : listePatient) {
+            System.out.println("Checking patient with numero: " + patient.getPatientId()); // Ensure getNumero() exists
+            if (patient.getPatientId() == numDossier) {
+                return patient;
             }
         }
         return null;
     }
-    
+
+    public  String getEmail(){
+        return email;
+    }
+
     public void ajouterRendezVous(RendezVous rendezvous) {
         listeRendezVous.add(rendezvous);
         rendezvous.getPatient().getListRendezVous().add(rendezvous);
@@ -82,7 +76,6 @@ public class Ortho implements Serializable {
     public void ajouterExercice(String consigne){
         Exercice exercice = new Exercice(consigne);
         listeExercices.add(exercice);
-
     }
 
     public void ajouterQuestion(String prompt, Categorie categorie, TypeQuestion type, List<String> options, List<String> repense){
@@ -109,50 +102,19 @@ public class Ortho implements Serializable {
         return listeRendezVous;
     }
 
+    public void ajouterQuestionList(List<Question> questins){
+        this.listeQuestions.addAll(questins);
+    }
+
     public List<Question> getListeQuestions(){
         return listeQuestions;
     }
     public List<Exercice> getListeExercices(){return listeExercices;}
 
-
-
-    public String getPrenom() {
-        return prenom;
+    public String getNom(){
+        return nom;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
 
-    public String getAdress() {
-        return adress;
-    }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTlph() {
-        return tlph;
-    }
-
-    public void setTlph(String tlph) {
-        this.tlph = tlph;
-    }
-
-    public String getMotDePasse() {
-        return motDePasse;
-    }
-
-    public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
-    }
 }

@@ -128,7 +128,7 @@ public class AjouterBO implements Initializable {
     }
 
     private void handleNextStep() {
-        List<Question> selectedQuestions = questionsTable.getSelectionModel().getSelectedItems();
+        List<com.example.back.Question> selectedQuestions = questionsTable.getSelectionModel().getSelectedItems();
         List<Exercice> selectedExercises = exercisesTable.getSelectionModel().getSelectedItems();
 
         if (selectedQuestions.isEmpty() && selectedExercises.isEmpty()) {
