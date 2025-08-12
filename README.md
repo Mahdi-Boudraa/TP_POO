@@ -1,0 +1,1 @@
+Speech Therapist Cabinet Management Application Developed a Java-based application using JavaFX for the front end to manage patient records and appointments for a speech therapist cabinet. Implemented OOP principles to allow multiple therapists to log in and manage their schedules. Features included appointment scheduling, patient records managing
